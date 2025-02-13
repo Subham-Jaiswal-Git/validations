@@ -15,8 +15,7 @@ const ParentComponent = () => {
       <DL/>
       <Aadhaar/>
       <Gst/>
-
-
+      
     </>
   );
 };

@@ -3,12 +3,9 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Gst from './Components/Gst';
 import Form from './Sections/Form';
-import VoterIDForm from './Components/VoterIDForm';
 import ParentComponent from './Sections/ParentComponent';
-import Pan from './Components/Pan';
-import DL from './Components/DL';
+import Hero from './Sections/Hero';
 function App() {
   // const [count, setCount] = useState(0)
 
@@ -40,7 +37,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<ParentComponent/>} />
-            
+            <Route exact path="/form" element={<Form/>} />
+            <Route exact path="/hero" element={<Hero/>} />
           </Routes>
         </BrowserRouter>
       </div>
@@ -49,4 +47,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

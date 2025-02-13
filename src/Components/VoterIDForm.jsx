@@ -38,6 +38,7 @@ const VoterIDForm = () => {
     } else {
       setMessage("🔹 Keep typing... Voter ID should be 10 characters.");
     }
+    
   };
   // Handle focus out (onBlur) validation
   const handleBlur = () => {

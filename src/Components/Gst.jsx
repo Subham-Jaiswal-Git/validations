@@ -22,28 +22,10 @@ const Gst = () => {
         return gstRegex.test(gstin);
     };
 
-    // const handleChange = (e) => {
-    //     const value = e.target.value.toUpperCase();
-    //     setGstin(value);
-
-    //     // Remove error message when user starts typing again
-    //     if (message === "❌ Invalid GSTIN.") {
-    //         setMessage("");
-    //     }
-
-    //     if (value.length > 0 && value.length < 15) {
-    //         setMessage("🔹 Keep typing... GSTIN should be 15 characters.");
-    //     } else if (value.length === 15) {
-    //         setMessage(validateGSTIN(value) ? "✅ Valid GSTIN." : "❌ Invalid GSTIN.");
-    //     } else {
-    //         setMessage("");
-    //     }
-    // };
-
     const handleChange = (e) => {
         const value = e.target.value.toUpperCase();
         setGstin(value);
-
+    
         // Remove error message when user starts typing again
         if (message === "❌ Invalid GSTIN.") {
             setMessage("");
@@ -60,6 +42,14 @@ const Gst = () => {
             return;
         }
     
+        if (value.length >= 2) {
+            const stateCode = parseInt(value.substring(0, 2), 10);
+            if (isNaN(stateCode) || stateCode < 1 || stateCode > 35) {
+                setMessage("❌ First two digits must be between 01 and 35 (Valid State Code).");
+                return;
+            }
+        }
+    
         if (value.length >= 3 && value.length < 8 && !/^[A-Z]*$/.test(value.substring(2, value.length))) {
             setMessage("❌ 3rd to 7th characters must be alphabets (PAN Format).");
             return;
@@ -70,23 +60,13 @@ const Gst = () => {
             return;
         }
     
-        if (value.length === 12 && value[11] !== "Z") {
-            setMessage("❌ 12th character must be 'Z'.");
+        if (value.length === 13 && !/^[0-9]$/.test(value[12])) {
+            setMessage("❌ 13th character must be an numeric value.");
             return;
         }
     
-        if (value.length === 13 && !/^[0-9A-Z]$/.test(value[12])) {
-            setMessage("❌ 13th character must be an alphanumeric value.");
-            return;
-        }
-    
-        if (value.length === 14 && !/^[A-Z]$/.test(value[13])) {
-            setMessage("❌ 14th character must be an alphabet (A-Z).");
-            return;
-        }
-    
-        if (value.length === 15 && !/^[0-9A-Z]$/.test(value[14])) {
-            setMessage("❌ 15th character must be alphanumeric.");
+        if (value.length === 14 && !/^[Z]$/.test(value[13])) {
+            setMessage("❌ 14th character must be an alphabet (Z) by default.");
             return;
         }
     
@@ -96,8 +76,6 @@ const Gst = () => {
         } else {
             setMessage("🔹 Keep typing... GSTIN should be 15 characters.");
         }
-
-        
     };
     
     const handleBlur = () => {
