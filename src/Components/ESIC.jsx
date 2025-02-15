@@ -1,66 +1,68 @@
-import React, { useState } from "react";
+import React from "react";
 
-const ESIC = (props) => {
-    const [esic, setEsic] = useState("");
-    const [message, setMessage] = useState("");
+const ESIC = ({
+    value = "",
+    onChange,
+    className = "",
+    inputClassName = "",
+    error = "",
+    onErrorOccur
+}) => {
 
-    const validateESIC = (esic) => {
-        return /^\d{17}$/.test(esic); // ESIC must be exactly 17 digits
-    };
+    const validateESIC = (esic) => /^\d{17}$/.test(esic); // ESIC must be exactly 17 digits
 
     const handleChange = (e) => {
-        const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-        setEsic(value);
+        const rawValue = e.target.value;
+        const newValue = rawValue.replace(/\D/g, "").slice(0, 17);
 
-        // Remove error message when user starts typing again
-        if (message === "❌ Invalid ESIC Number.") {
-            setMessage( `${props.msg1}`);
+        onChange(newValue);
+
+        if (rawValue !== newValue) {
+            onErrorOccur("❌ Only numeric values are allowed.");
+            return;
         }
-        if (value.length > 0 && value.length < 17) {
-            setMessage(`${props.msg2}`);
-        } else if (value.length === 17) {
-            setMessage(validateESIC(value) ? `${props.validMsg}` : `${props.invalidMsg}`);
+
+        if (!newValue) {
+            onErrorOccur("");
+            return;
+        }
+
+        if (newValue.length < 17) {
+            onErrorOccur("🔹 Keep typing... ESIC should be 17 digits.");
         } else {
-            setMessage(`${props.formatMsg}`);
+            onErrorOccur(validateESIC(newValue) ? "✅ Valid ESIC Number." : "❌ Invalid ESIC Number.");
         }
     };
 
     const handleBlur = () => {
-        if (esic.length !== 17 || !validateESIC(esic)) {
-            setMessage(`${props.handleBlur}`);
+        if (value.length !== 17 || !validateESIC(value)) {
+            onErrorOccur("❌ Invalid ESIC Number.");
         }
     };
 
     const handleFocus = () => {
-        if (message === "❌ Invalid ESIC Number.") {
-            setMessage(`${props.handleFocus}`);
+        if (error === "❌ Invalid ESIC Number.") {
+            onErrorOccur("🔹 Keep typing... ESIC should be 17 digits.");
         }
     };
 
     return (
-        <div className={`${props.div1ClassName}`}>
-            <div className={`${props.div2ClassName}`}>
-                <h2 className={`${props.h2ClassName}`}>ESIC Number Validation</h2>
-                <label className={`${props.labelClassName}`}>
-                    ESIC Number:
-                </label>
-
-                <input
-                    type="text"
-                    value={esic}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    onFocus={handleFocus}
-                    placeholder="Enter ESIC Number"
-                    maxLength={17}
-                    className={`${props.inputClassName}`}
-                />
-                {message && (
-                    <p className={`mt-2 text-sm font-semibold ${message.includes("❌") ? "text-red-600" : "text-green-600"}`}>
-                        {message}
-                    </p>
-                )}
-            </div>
+        <div className={className}>
+            <input
+                type="text"
+                value={value}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onFocus={handleFocus}
+                placeholder="Enter ESIC Number"
+                maxLength={17}
+                className={inputClassName}
+            />
+            {error && (
+                <p className={`mt-2 text-sm ${error.includes("❌") ? "text-red-600" : "text-green-600"}`}>
+                    {error}
+                </p>
+            )}
         </div>
     );
 };

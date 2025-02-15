@@ -1,49 +1,129 @@
-import Aadhaar from "../Components/Aadhaar";
+import React, { useState } from "react";
 import DL from "../Components/DL";
-import Gst from "../Components/Gst";
 import Pan from "../Components/Pan";
 import VoterIDForm from "../Components/VoterIDForm";
 import ESIC from "../Components/ESIC";
+import Aadhaar from "../Components/Aadhaar";
+
+import Gst from "../Components/Gst";
 import EPF from "../Components/EPF";
 import NationalPopulationRegister from "../Components/NationalPopulationRegister"
 import FinancialTaxation from "../Components/FinancialTaxation";
 import ITRValidation from "../Components/ITRValidation";
 import PropertyLandRecords from "../Components/PropertyLandRecords";
-import React, { useState } from "react";
 import PropertyRegistrationCertificate from "../Components/PropertyRegistrationCertificate";
 import EncumbranceCertificate from "../Components/EncumbranceCertificate";
+
 const ParentComponent = () => {
   const [esicValue, setEsicValue] = useState("");
-  const [esicError, setEsicError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [voterID, setVoterID] = useState("");
+  const [voterIDError, setVoterIDError] = useState("");
+
+  const [pan, setPan] = useState("");
+  const [panError, setPanError] = useState("");
+
+  const [dl, setDL] = useState("");
+  const [dlError, setDLError] = useState("");
+
+  const [aadhaar, setAadhaar] = useState("");
+  const [aadhaarError, setAadhaarError] = useState("");
+
   return (
     <>
-      {/*<div className=" flex justify-center items-center min-h-screen bg-gray-100">
-        <VoterIDForm className="bg-white shadow-lg rounded-lg p-6" />
-      </div> */}
+      <div className="flex gap-2">
+        <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
+          <h2 className="text-center ">ESIC Number Validation : </h2>
+          <ESIC
+            value={esicValue}
+            onChange={setEsicValue}
+            className=""
+            inputClassName="border border-gray-500 rounded-md shadow-lg"
+            error={errorMessage}
+            onErrorOccur={setErrorMessage}
+          />
+        </div>
 
-      {/* <Pan/>
-      <VoterIDForm/>
-      <DL/>
-      <Aadhaar/>
-      <Gst/> */}
+        <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
+          <h2 className="text-center">Voter ID Validation:</h2>
+          <VoterIDForm
+            value={voterID}
+            onChange={setVoterID}
+            className=""
+            inputClassName="border border-gray-500 rounded-md shadow-lg"
+            error={voterIDError}
+            onErrorOccur={setVoterIDError}
+          />
+        </div>
 
-      {/* <ESIC
-        msg1=" "
-        msg2="🔹 Keep typing... ESIC should be 17 digits."
-        validMsg="✅ Valid ESIC Number."
-        invalidMsg="❌ Invalid ESIC Number."
-        formatMsg="Its should be 17 digit numeric value"
-        handleBlur="❌ Invalid ESIC Number."
-        handleFocus="🔹 Keep typing... ESIC should be 17 digits."
-        div1ClassName="flex flex-col items-center mb-5 mt-5"
-        div2ClassName="w-full max-w-sm p-5 bg-white shadow-lg rounded-lg "
-        h2ClassName="text-xl font-semibold mb-4 text-center"
-        labelClassName="block text-gray-700 text-sm font-bold mb-2"
-        inputClassName="w-full px-4 py-2 border rounded-lg shadow-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-      /> */}
+        <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
+          <h2 className="text-center">PAN Validation:</h2>
+          <Pan
+            value={pan}
+            onChange={setPan}
+            className=""
+            inputClassName="border border-gray-500 rounded-md shadow-lg"
+            error={panError}
+            onErrorOccur={setPanError}
+          />
+        </div>
+
+        <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
+          <h2 className="text-center">Driving License Validation:</h2>
+          <DL
+            value={dl}
+            onChange={setDL}
+            className=""
+            inputClassName="border border-gray-500 rounded-md shadow-lg"
+            error={dlError}
+            onErrorOccur={setDLError}
+          />
+        </div>
+
+        <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
+          <h2 className="text-center">Aadhaar Card Validation:</h2>
+          <Aadhaar
+            value={aadhaar}
+            onChange={setAadhaar}
+            className=""
+            inputClassName="border border-gray-500 rounded-md shadow-lg"
+            error={aadhaarError}
+            onErrorOccur={setAadhaarError}
+          />
+        </div>
 
 
-       <EPF
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {/* <Gst/> */}
+
+      {/* <EPF
         msg1="Please enter a valid EPF number."
         msg2="🔹 Keep typing... EPF should be 22 digits."
         validMsg="✅ Valid EPF Number."
@@ -56,7 +136,7 @@ const ParentComponent = () => {
         h2ClassName="text-xl font-semibold mb-4 text-center"
         labelClassName="block text-gray-700 text-sm font-bold mb-2"
         inputClassName="w-full px-4 py-2 border rounded-lg shadow-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-      />
+      /> */}
 
       {/*<NationalPopulationRegister
         msg1="Please enter a valid NPR number."

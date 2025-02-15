@@ -1,76 +1,77 @@
-import React, { useState } from "react";
+import React from "react";
 
-const VoterIDForm = () => {
-  const [voterID, setVoterID] = useState("");
-  const [message, setMessage] = useState("");
+const VoterIDForm = ({
+  value = "",
+  onChange,
+  className = "",
+  inputClassName = "",
+  error = "",
+  onErrorOccur
+}) => {
 
-  const validateVoterID = (value) => {
-    return /^[A-Z]{3}[0-9]{7}$/.test(value);
-  };
-  
+  const validateVoterID = (id) => /^[A-Z]{3}[0-9]{7}$/.test(id); // Format: ABC123456D
+
   const handleChange = (e) => {
-    const value = e.target.value.toUpperCase();
-    setVoterID(value);
+    const rawValue = e.target.value.toUpperCase();
+    const newValue = rawValue.replace(/[^A-Z0-9]/g, "").slice(0, 10);
 
-    if (value.length > 10) {
-      setMessage("❌ Voter ID cannot exceed 10 characters.");
+    onChange(newValue);
+
+    if (rawValue !== newValue) {
+      onErrorOccur("❌ Only alphabets (A-Z) and digits (0-9) are allowed.");
       return;
     }
 
-    // Validate dynamically as the user types
-    if (value.length >= 1 && !/^[A-Z]*$/.test(value.substring(0, Math.min(3, value.length)))) {
-      setMessage("❌ First 3 characters must be alphabets (A-Z).");
+    if (newValue.length > 10) {
+      onErrorOccur("❌ Voter ID cannot exceed 10 characters.");
       return;
     }
 
-    if (value.length >= 4 && !/^[0-9]*$/.test(value.substring(3, Math.min(9, value.length)))) {
-      setMessage("❌ 4th to 9th characters must be digits (0-9).");
+    if (newValue.length >= 1 && !/^[A-Z]*$/.test(newValue.substring(0, Math.min(3, newValue.length)))) {
+      onErrorOccur("❌ First 3 characters must be alphabets (A-Z).");
       return;
     }
 
-    if (value.length === 10 && !/^[A-Z]$/.test(value[9])) {
-      setMessage("❌ Last character must be an alphabet (A-Z).");
+    if (newValue.length >= 4 && !/^[0-9]*$/.test(newValue.substring(3, Math.min(10, newValue.length)))) {
+      onErrorOccur("❌ 4th to 10th characters must be digits (0-9).");
       return;
     }
 
-    if (value.length === 10) {
-      setMessage("✅ Voter ID is valid.");
+    if (newValue.length === 10) {
+      onErrorOccur("✅ Voter ID is valid.");
     } else {
-      setMessage("🔹 Keep typing... Voter ID should be 10 characters.");
-    }
-    
-  };
-  // Handle focus out (onBlur) validation
-  const handleBlur = () => {
-    if (voterID.length !== 10 || !/^[A-Z]{3}[0-9]{6}[A-Z]$/.test(voterID)) {
-      setMessage("❌ Invalid Voter ID.");
+      onErrorOccur("🔹 Keep typing... Voter ID should be 10 characters.");
     }
   };
 
-  // Handle focus in (onFocus) to clear error message
+  const handleBlur = () => {
+    if (value.length !== 10 || !validateVoterID(value)) {
+      onErrorOccur("❌ Invalid Voter ID.");
+    }
+  };
+
   const handleFocus = () => {
-    if (message === "❌ Invalid Voter ID.") {
-      setMessage("🔹 Keep typing... Voter ID should be 10 characters."); // Clear the invalid message when input is focused again
+    if (error === "❌ Invalid Voter ID.") {
+      onErrorOccur("🔹 Keep typing... Voter ID should be 10 characters.");
     }
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-md text-center">
-      <h2 className="text-xl font-semibold mb-4">Voter ID Validation</h2>
-      <label className="block text-gray-700 text-start">EPIC Number:</label>
+    <div className={className}>
       <input
         type="text"
-        value={voterID}
-        maxLength="10"
+        value={value}
         onChange={handleChange}
         onBlur={handleBlur}
-        onFocus={handleFocus} 
-        placeholder="Enter Voter ID (e.g., ABCDE123456)"
-        className="w-full p-2 border rounded text-uppercase"
-        required
+        onFocus={handleFocus}
+        placeholder="Enter Voter ID"
+        maxLength={10}
+        className={inputClassName}
       />
-      {message && (
-        <p className={`mt-2 text-start font-bold ${message.includes("invalid") ? "text-red-500" : "text-green-500"}`}>{message}</p>
+      {error && (
+        <p className={`mt-2 text-sm ${error.includes("❌") ? "text-red-600" : "text-green-600"}`}>
+          {error}
+        </p>
       )}
     </div>
   );

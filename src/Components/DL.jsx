@@ -1,79 +1,82 @@
-import React, { useState } from "react";
+import React from "react";
 
-const DL = () => {
-  const [licenseNumber, setLicenseNumber] = useState("");
-  const [message, setMessage] = useState("");
-
-  const validateDLNumber = (dl) => {
-    return /^[A-Z]{2}\d{2}\s\d{4}\s\d{7}$/.test(dl);
-  };
+const DL = ({
+  value = "",
+  onChange,
+  className = "",
+  inputClassName = "",
+  error = "",
+  onErrorOccur
+}) => {
+  const validateDL = (dl) => /^[A-Z]{2}\d{2}\d{4}\d{7}$/.test(dl);
 
   const handleChange = (e) => {
-    const value = e.target.value.toUpperCase();
-    setLicenseNumber(value);
+    const rawValue = e.target.value.toUpperCase();
+    const newValue = rawValue.replace(/[^A-Z0-9]/g, "").slice(0, 15); // Allow only alphanumeric characters & limit length
 
-    if (value.length > 16) {
-      setMessage("❌ DL Number cannot exceed 16 characters.");
+    onChange(newValue);
+
+    if (rawValue !== newValue) {
+      onErrorOccur("❌ Only alphabets (A-Z) and digits (0-9) are allowed.");
       return;
     }
 
-    // Validate dynamically while typing
-    if (value.length >= 1 && !/^[A-Z]*$/.test(value.substring(0, Math.min(2, value.length)))) {
-      setMessage("❌ First 2 characters must be alphabets (State Code).");
+    if (newValue.length > 15) {
+      onErrorOccur("❌ DL Number cannot exceed 15 characters.");
       return;
     }
 
-    if (value.length >= 3 && !/^[0-9]*$/.test(value.substring(2, Math.min(4, value.length)))) {
-      setMessage("❌ 3rd & 4th characters must be digits (RTO Code).");
+    if (newValue.length >= 1 && !/^[A-Z]*$/.test(newValue.substring(0, Math.min(2, newValue.length)))) {
+      onErrorOccur("❌ First 2 characters must be alphabets (State Code).");
       return;
     }
 
-    if (value.length >= 5 && !/^[0-9- ]*$/.test(value.substring(4, value.length))) {
-      setMessage("❌ The remaining characters must be digits, '-' or space.");
+    if (newValue.length >= 3 && !/^[0-9]*$/.test(newValue.substring(2, Math.min(4, newValue.length)))) {
+      onErrorOccur("❌ 3rd & 4th characters must be digits (RTO Code).");
       return;
     }
 
-    // Regex for complete valid DL number format
-    const dlPattern = /^[A-Z]{2}[0-9]{2}[- ]?[0-9]{7,8}$/;
+    if (newValue.length >= 5 && !/^[0-9]*$/.test(newValue.substring(4, newValue.length))) {
+      onErrorOccur("❌ The remaining characters must be digits.");
+      return;
+    }
 
-    if (dlPattern.test(value)) {
-      setMessage("✅ Valid DL Number.");
+    if (validateDL(newValue)) {
+      onErrorOccur("✅ Valid DL Number.");
     } else {
-      setMessage("🔹 Keep typing... Follow format: AA-12-12345678");
+      onErrorOccur("🔹 Keep typing... Follow format: AA1212341234567");
     }
   };
 
   const handleBlur = () => {
-    if (licenseNumber.length < 10 || !/^[A-Z]{2}[0-9]{2}[- ]?[0-9]{7,8}$/.test(licenseNumber)) {
-      setMessage("❌ Invalid DL Number.");
+    if (value.length < 10 || !validateDL(value)) {
+      onErrorOccur("❌ Invalid DL Number.");
     }
   };
 
-  // Handle focus in (onFocus) to clear error message
   const handleFocus = () => {
-    if (message === "❌ Invalid DL Number.") {
-      setMessage("🔹 Keep typing... Follow format: AA-12-12345678"); // Clear the invalid message when input is focused again
+    if (error === "❌ Invalid DL Number.") {
+      onErrorOccur("🔹 Keep typing... Follow format: AA1212341234567");
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-5 p-6 bg-white rounded-xl shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Driving License Validation</h2>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-start">License Number:</label>
-        <input
-          type="text"
-          name="licenseNumber"
-          value={licenseNumber}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          className="w-full p-2 border rounded"
-          placeholder="AB12 1234 1234567"
-          required
-        />
-        {message && <p className={`mt-2 text-start ${message.includes("Invalid") ? "text-red-500 " : "text-green-500"}`}>{message}</p>}
-      </div>
+    <div className={className}>
+      <input
+        type="text"
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        placeholder="Enter DL Number"
+        maxLength={15}
+        className={inputClassName}
+      />
+      {error && (
+        <p className={`mt-2 text-sm ${error.includes("❌") ? "text-red-600" : "text-green-600"}`}>
+          {error}
+        </p>
+      )}
     </div>
   );
 };

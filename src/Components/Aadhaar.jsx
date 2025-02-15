@@ -1,69 +1,74 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Aadhaar = () => {
-    const [aadhaar, setAadhaar] = useState("");
-    const [message, setMessage] = useState("");
+const Aadhaar = ({
+  value = "",
+  onChange,
+  className = "",
+  inputClassName = "",
+  error = "",
+  onErrorOccur
+}) => {
+  const validateAadhaar = (aadhaar) => /^\d{4}\d{4}\d{4}$/.test(aadhaar);
 
-    const validateAadhaar = (aadhaar) => {
-        return /^\d{12}$/.test(aadhaar); // Aadhaar must be exactly 12 digits
-    };
+  const handleChange = (e) => {
+    const rawValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+    const newValue = rawValue.slice(0, 12); // Aadhaar should have a max length of 12 digits
 
-    const handleChange = (e) => {
-        const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-        setAadhaar(value);
+    onChange(newValue);
 
-        // Remove error message when user starts typing again
-        if (message === "❌ Invalid Aadhaar Number.") {
-            setMessage("");
-        }
+    if (rawValue !== newValue) {
+      onErrorOccur("❌ Only digits (0-9) are allowed.");
+      return;
+    }
 
-        if (value.length > 0 && value.length < 12) {
-            setMessage("🔹 Keep typing... Aadhaar should be 12 digits.");
-        } else if (value.length === 12) {
-            setMessage(validateAadhaar(value) ? "✅ Valid Aadhaar Number." : "❌ Invalid Aadhaar Number.");
-        } else {
-            setMessage("");
-        }
-    };
+    if (newValue.length > 12) {
+      onErrorOccur("❌ Aadhaar Number cannot exceed 12 digits.");
+      return;
+    }
 
-    const handleBlur = () => {
-        if (aadhaar.length !== 12 || !validateAadhaar(aadhaar)) {
-            setMessage("❌ Invalid Aadhaar Number.");
-        }
-    };
+    if (newValue.length > 0 && newValue.length < 12) {
+      onErrorOccur("🔹 Keep typing... Aadhaar should be 12 digits.");
+      return;
+    }
 
-    const handleFocus = () => {
-        if (message === "❌ Invalid Aadhaar Number.") {
-            setMessage("🔹 Keep typing... Aadhaar should be 12 digits.");
-        }
-    };
+    if (validateAadhaar(newValue)) {
+      onErrorOccur("✅ Valid Aadhaar Number.");
+    } else {
+      onErrorOccur("only numeric value allow");
+    }
+  };
 
-    return (
-        <div className="flex flex-col items-center mb-5 mt-5">
-            <div className="w-full max-w-sm p-5 bg-white shadow-lg rounded-lg">
-                <h2 className="text-xl font-semibold mb-4">AADHAAR CARD Validation</h2>
-                <label className="block text-start text-gray-700 text-sm font-bold mb-2">
-                    Aadhaar Number:
-                </label>
+  const handleBlur = () => {
+    if (value.length !== 12 || !validateAadhaar(value)) {
+      onErrorOccur("❌ Invalid Aadhaar Number.");
+    }
+  };
 
-                <input
-                    type="text"
-                    value={aadhaar}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    onFocus={handleFocus}
-                    placeholder="Enter Aadhaar Number"
-                    maxLength={12}
-                    className="w-full px-4 py-2 border rounded-lg shadow-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                />
-                {message && (
-                    <p className={`mt-2 text-start text-sm font-semibold ${message.includes("❌") ? "text-red-600" : "text-green-600"}`}>
-                        {message}
-                    </p>
-                )}
-            </div>
-        </div>
-    );
+  const handleFocus = () => {
+    if (error === "❌ Invalid Aadhaar Number.") {
+      onErrorOccur("🔹 Keep typing... Follow format: 123412341234");
+    }
+  };
+
+  return (
+    <div className={className}>
+      <input
+        type="text"
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        placeholder="Enter Aadhaar Number"
+        maxLength={12}
+        className={inputClassName}
+      />
+      {error && (
+        <p className={`mt-2 text-sm ${error.includes("❌") ? "text-red-600" : "text-green-600"}`}>
+          {error}
+        </p>
+      )}
+    </div>
+  );
 };
 
 export default Aadhaar;
