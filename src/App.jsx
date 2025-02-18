@@ -4,8 +4,10 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Form from './Sections/Form';
+import Form2 from './Sections/Form2';
 import ParentComponent from './Sections/ParentComponent';
 import Hero from './Sections/Hero';
+
 function App() {
   // const [count, setCount] = useState(0)
 
@@ -39,6 +41,7 @@ function App() {
             <Route exact path="/" element={<ParentComponent/>} />
             <Route exact path="/form" element={<Form/>} />
             <Route exact path="/hero" element={<Hero/>} />
+            <Route exact path="/form2" element={<Form2/>} />
           </Routes>
         </BrowserRouter>
       </div>
