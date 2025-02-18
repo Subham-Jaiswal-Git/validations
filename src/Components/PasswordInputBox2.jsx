@@ -1,6 +1,7 @@
 import React from 'react';
 
 const PasswordInputBox2 = ({ value, className, setPassword, setErrors }) => {
+    
     const handleChange = (e) => {
         const value = e.target.value;
         setPassword(value);

@@ -4,7 +4,6 @@ const ForgotPassword = ({className}) => {
             <a href="#" className={className}>
                 Forgot your password?
             </a>
-
     );
 };
 

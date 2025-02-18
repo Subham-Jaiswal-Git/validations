@@ -5,6 +5,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Form from './Sections/Form';
 import Form2 from './Sections/Form2';
+import Form3 from './Sections/Form3';
 import ParentComponent from './Sections/ParentComponent';
 import Hero from './Sections/Hero';
 
@@ -42,6 +43,7 @@ function App() {
             <Route exact path="/form" element={<Form/>} />
             <Route exact path="/hero" element={<Hero/>} />
             <Route exact path="/form2" element={<Form2/>} />
+            <Route exact path="/form3" element={<Form3/>} />
           </Routes>
         </BrowserRouter>
       </div>

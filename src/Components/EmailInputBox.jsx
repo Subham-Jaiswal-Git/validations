@@ -3,7 +3,8 @@ import React from 'react';
 const EmailInputBox = ({ value, className, onChange, onErrorExist }) => {
 
     return (
-
+        
+        
         <input
             type="email"
             value={value}

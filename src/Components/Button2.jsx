@@ -50,10 +50,22 @@ const Button = ({className, username, email, password, setUsername, setEmail, se
             setPassword("");
             setErrors({});
         }
+
+        e.preventDefault();
+
+        if (!checked) {
+            newErrors.checkbox = "You must agree to continue";
+        }
+
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length === 0) {
+            alert("Form submitted successfully!");
+        }
     };
     
     return (
-            <button type="submit" className={className} onClick={onClick}> 
+            <button type="submit" className={className} onClick={handleSubmit}> 
                 Login
             </button>
     );
