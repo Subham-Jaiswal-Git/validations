@@ -1,9 +1,9 @@
 import React from 'react';
-const Button = ({className}) => {
+const Button = ({ className }) => {
     return (
         <div>
-            <button 
-                type="submit" 
+            <button
+                type="submit"
                 className={className}
             >
                 Login
