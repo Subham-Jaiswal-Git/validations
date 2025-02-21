@@ -8,7 +8,8 @@ import Form2 from './Sections/Form2';
 import Form3 from './Sections/Form3';
 import ParentComponent from './Sections/ParentComponent';
 import Hero from './Sections/Hero';
-
+import Gold from './Sections/Gold'
+import Otp from './Sections/Otp'
 function App() {
   // const [count, setCount] = useState(0)
 
@@ -44,6 +45,8 @@ function App() {
             <Route exact path="/hero" element={<Hero/>} />
             <Route exact path="/form2" element={<Form2/>} />
             <Route exact path="/form3" element={<Form3/>} />
+            <Route exact path="/gold" element={<Gold/>} />
+            <Route exact path="/otp" element={<Otp/>} />
           </Routes>
         </BrowserRouter>
       </div>

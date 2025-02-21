@@ -32,7 +32,7 @@ const ParentComponent = () => {
 
   return (
     <>
-      <div className="flex gap-2">
+      <div className="flex gap-2 p-5">
         <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
           <h2 className="text-center ">ESIC Number Validation : </h2>
           <ESIC

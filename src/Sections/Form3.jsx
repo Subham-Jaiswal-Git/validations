@@ -90,6 +90,7 @@ const Form3 = () => {
                                             />
                                             {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
                                         </div>
+
                                         <div>
                                             <Checkbox
                                                 checked={checked}
@@ -99,14 +100,17 @@ const Form3 = () => {
                                             />
                                             {errors.checkbox && <p className="text-red-500 text-sm">{errors.checkbox}</p>}
                                         </div>
+                                        
                                         <Button2
                                             className="text-sm text-right flex w-full justify-center rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-green-500"
                                             username={username}
                                             email={email}
                                             password={password}
+                                            checked={checked}
                                             setUsername={setUsername}
                                             setEmail={setEmail}
                                             setPassword={setPassword}
+                                            setChecked={setChecked}
                                             setErrors={setErrors}
                                             onClick={(e) => handleSubmit(e)}
 
