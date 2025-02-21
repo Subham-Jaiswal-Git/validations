@@ -8,7 +8,7 @@ const OtpBox = ({ name = "otp", length = 6, className = "", onChange, value = ""
 
     const newOtp = value.split(""); // Convert value to an array
     newOtp[index] = val;
-    
+
     const otpValue = newOtp.join(""); // Convert back to string
     onChange(otpValue); // Update parent component
 

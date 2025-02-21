@@ -19,12 +19,9 @@ const Otp = () => {
         onChange={setOtpValue}
         value={otpValue}
       />
-      {/* <button
-        onClick={handleSubmit} // Submitting OTP manually
+      {/* <button onClick={handleSubmit} // Submitting OTP manually
         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
-      >
-        Submit OTP
-      </button> */}
+      >Submit OTP</button> */}
     </div>
   );
 };

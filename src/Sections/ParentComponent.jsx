@@ -1,39 +1,33 @@
 import React, { useState } from "react";
-import DL from "../Components/DL";
-import Pan from "../Components/Pan";
-import VoterIDForm from "../Components/VoterIDForm";
-import ESIC from "../Components/ESIC";
+// import DL from "../Components/DL";
+// import Pan from "../Components/Pan";
+// import VoterIDForm from "../Components/VoterIDForm";
+// import ESIC from "../Components/ESIC";
 import Aadhaar from "../Components/Aadhaar";
 
-import Gst from "../Components/Gst";
-import EPF from "../Components/EPF";
-import NationalPopulationRegister from "../Components/NationalPopulationRegister"
-import FinancialTaxation from "../Components/FinancialTaxation";
-import ITRValidation from "../Components/ITRValidation";
-import PropertyLandRecords from "../Components/PropertyLandRecords";
-import PropertyRegistrationCertificate from "../Components/PropertyRegistrationCertificate";
-import EncumbranceCertificate from "../Components/EncumbranceCertificate";
+// import Gst from "../Components/Gst";
+// import EPF from "../Components/EPF";
+// import NationalPopulationRegister from "../Components/NationalPopulationRegister"
+// import FinancialTaxation from "../Components/FinancialTaxation";
+// import ITRValidation from "../Components/ITRValidation";
+// import PropertyLandRecords from "../Components/PropertyLandRecords";
+// import PropertyRegistrationCertificate from "../Components/PropertyRegistrationCertificate";
+// import EncumbranceCertificate from "../Components/EncumbranceCertificate";
 
 const ParentComponent = () => {
-  const [esicValue, setEsicValue] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [esicValue, setEsicValue] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
-  const [voterID, setVoterID] = useState("");
-  const [voterIDError, setVoterIDError] = useState("");
+  // const [pan, setPan] = useState("");
+  // const [panError, setPanError] = useState("");
 
-  const [pan, setPan] = useState("");
-  const [panError, setPanError] = useState("");
-
-  const [dl, setDL] = useState("");
-  const [dlError, setDLError] = useState("");
-
-  const [aadhaar, setAadhaar] = useState("");
-  const [aadhaarError, setAadhaarError] = useState("");
+  // const [dl, setDL] = useState("");
+  // const [dlError, setDLError] = useState("");
 
   return (
     <>
       <div className="flex gap-2 p-5">
-        <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
+        {/* <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
           <h2 className="text-center ">ESIC Number Validation : </h2>
           <ESIC
             value={esicValue}
@@ -43,21 +37,10 @@ const ParentComponent = () => {
             error={errorMessage}
             onErrorOccur={setErrorMessage}
           />
-        </div>
+        </div> */}
 
-        <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
-          <h2 className="text-center">Voter ID Validation:</h2>
-          <VoterIDForm
-            value={voterID}
-            onChange={setVoterID}
-            className=""
-            inputClassName="border border-gray-500 rounded-md shadow-lg"
-            error={voterIDError}
-            onErrorOccur={setVoterIDError}
-          />
-        </div>
 
-        <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
+        {/* <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
           <h2 className="text-center">PAN Validation:</h2>
           <Pan
             value={pan}
@@ -67,9 +50,9 @@ const ParentComponent = () => {
             error={panError}
             onErrorOccur={setPanError}
           />
-        </div>
+        </div> */}
 
-        <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
+        {/* <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
           <h2 className="text-center">Driving License Validation:</h2>
           <DL
             value={dl}
@@ -79,47 +62,9 @@ const ParentComponent = () => {
             error={dlError}
             onErrorOccur={setDLError}
           />
-        </div>
-
-        <div className="max-w-sm rounded-lg shadow-lg bg-white p-5 border border-gray-200">
-          <h2 className="text-center">Aadhaar Card Validation:</h2>
-          <Aadhaar
-            value={aadhaar}
-            onChange={setAadhaar}
-            className=""
-            inputClassName="border border-gray-500 rounded-md shadow-lg"
-            error={aadhaarError}
-            onErrorOccur={setAadhaarError}
-          />
-        </div>
-
-
+        </div> */}
+        
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       {/* <Gst/> */}
 
