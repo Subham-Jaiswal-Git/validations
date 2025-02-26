@@ -10,15 +10,27 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^4.6.0",
+    "@fingerprintjs/fingerprintjs-pro": "^3.11.8",
+    "@fingerprintjs/fingerprintjs-pro-react": "^2.6.3",
+    "@github/webauthn-json": "^2.1.1",
     "@react-oauth/google": "^0.12.1",
+    "@simplewebauthn/browser": "^13.1.0",
+    "@simplewebauthn/server": "^13.1.1",
     "apple-signin-auth": "^1.7.8",
     "axios": "^1.7.9",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
     "firebase": "^11.3.1",
     "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.475.0",
     "rc-slider": "^11.1.8",
     "react": "^19.0.0",
     "react-apple-signin-auth": "^1.1.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.2",
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.5",
     "react-slider": "^2.0.6",
@@ -38,5 +50,18 @@
     "postcss": "^8.5.2",
     "tailwindcss": "^3.4.17",
     "vite": "^6.1.0"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Subham-Jaiswal-Git/validations.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Subham-Jaiswal-Git/validations/issues"
+  },
+  "homepage": "https://github.com/Subham-Jaiswal-Git/validations#readme"
 }

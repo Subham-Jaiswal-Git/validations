@@ -13,23 +13,33 @@ import Otp from './Sections/Otp';
 import Aadhar from './IdParent/Aadhar';
 import VoterId from './IdParent/VoterId';
 import SearchBoxParent from './Sections/SearchBoxParent';
-
+import Header from './KeenTheme/Parent/Header';
+import Signin from './ApiTesting/Authentication/Parent/Signin';
+import WebAuthnAuth from './Biometric/WebAuthnAuth'
+import AttendanceForm from './Biometric/AttendanceForm';
+import Biometric from './Biometric/Biometric';
 function App() {
   return (
-    <>  
+    <>
       <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<ParentComponent/>} />
-            <Route exact path="/form" element={<Form/>} />
-            <Route exact path="/hero" element={<Hero/>} />
-            <Route exact path="/form2" element={<Form2/>} />
-            <Route exact path="/form3" element={<Form3/>} />
-            <Route exact path="/gold" element={<Gold/>} />
-            <Route exact path="/otp" element={<Otp/>} />
-            <Route exact path="/aadhaar" element={<Aadhar/>} />
-            <Route exact path="/voterid" element={<VoterId/>} />
-            <Route exact path="/searchbox" element={<SearchBoxParent/>} />
+          
+            <Route exact path="/" element={<ParentComponent />} />
+            <Route exact path="/form" element={<Form />} />
+            <Route exact path="/hero" element={<Hero />} />
+            <Route exact path="/form2" element={<Form2 />} />
+            <Route exact path="/form3" element={<Form3 />} />
+            <Route exact path="/gold" element={<Gold />} />
+            <Route exact path="/otp" element={<Otp />} />
+            <Route exact path="/aadhaar" element={<Aadhar />} />
+            <Route exact path="/voterid" element={<VoterId />} />
+            <Route exact path="/searchbox" element={<SearchBoxParent />} />
+            <Route exact path="/header" element={<Header />} />
+            <Route exact path="/apisignin" element={<Signin />} />
+            <Route exact path="/web" element={<WebAuthnAuth />} />
+            <Route exact path="/web2" element={<AttendanceForm />} />
+            <Route exact path="/web3" element={<Biometric />} />
           </Routes>
         </BrowserRouter>
       </div>

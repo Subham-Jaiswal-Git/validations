@@ -7,7 +7,7 @@ import { signInWithPopup, OAuthProvider } from "firebase/auth";
 import PasswordInputBox2 from '../Components/PasswordInputBox2';
 import EmailInputBox2 from '../Components/EmailInputBox2';
 import UsernameInputBox2 from '../Components/UsernameInputBox2';
-import Button2 from '../Components/Button';
+import Button2 from '../Components/Button2';
 import ForgotPassword from '../Components/ForgotPassword';
 import Checkbox from '../Components/Checkbox';
 
