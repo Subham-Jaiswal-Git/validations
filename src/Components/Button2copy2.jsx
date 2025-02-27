@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useVisitorData } from "@fingerprintjs/fingerprintjs-pro-react";
-import FingerprintJS from "@fingerprintjs/fingerprintjs-pro";
 
 const Button2 = ({
     className,
@@ -19,26 +18,30 @@ const Button2 = ({
     const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
     const [biometricAuthenticated, setBiometricAuthenticated] = useState(false);
     const [fingerprintImage, setFingerprintImage] = useState(null);
-    const [visitorId, setVisitorId] = useState(null);
 
     // Validate Email Format
     const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    // 🔹 Capture Fingerprint using FingerprintJS API
+    // 🔹 Handle Fingerprint Capture
     const handleCaptureFingerprint = async () => {
         try {
-            const fp = await FingerprintJS.load({ token: "0R0wNbdOw7MgkGkUouQH" });
-            const result = await fp.get();
-            setVisitorId(result.visitorId);
-            setFingerprintCaptured(true);
-            toast.success("Fingerprint captured successfully!");
+            const response = await fetch("http://localhost:5000/fingerprint/capture");
+            const result = await response.json();
+
+            if (result.status === "success") {
+                setFingerprintCaptured(true);
+                setFingerprintImage(result.image); // Assume backend returns a base64 image
+                toast.success("Fingerprint captured successfully!");
+            } else {
+                toast.error("Fingerprint capture failed.");
+            }
         } catch (error) {
             console.error("Error capturing fingerprint:", error);
             toast.error("Error capturing fingerprint.");
         }
     };
 
-    // 🔹 Handle Biometric Authentication (Verify Fingerprint)
+    // 🔹 Handle Biometric Authentication (Match Fingerprint)
     const handleBiometricAuth = async () => {
         if (!fingerprintCaptured) {
             toast.error("Please capture your fingerprint first.");
@@ -49,7 +52,7 @@ const Button2 = ({
             const response = await fetch("http://localhost:5000/fingerprint/verify", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ visitorId }),
+                body: JSON.stringify({ visitorId: data?.visitorId || "Unknown" }),
             });
             const result = await response.json();
 
@@ -67,7 +70,7 @@ const Button2 = ({
 
     // 🔹 Handle Form Submission
     const handleSubmit = async (e) => {
-        if (e) e.preventDefault();
+        e.preventDefault();
         let newErrors = {};
 
         if (!username.trim()) newErrors.username = "Username cannot be empty";
@@ -109,7 +112,7 @@ const Button2 = ({
                 </div>
             )}
             
-            <button className={className} onClick={handleBiometricAuth} disabled={isLoading}>
+            <button className={className} onClick={handleBiometricAuth} disabled={!fingerprintCaptured || isLoading}>
                 {isLoading ? "Loading..." : "Authenticate with Biometric"}
             </button>
 

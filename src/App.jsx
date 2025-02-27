@@ -18,6 +18,7 @@ import Signin from './ApiTesting/Authentication/Parent/Signin';
 import WebAuthnAuth from './Biometric/WebAuthnAuth'
 import AttendanceForm from './Biometric/AttendanceForm';
 import Biometric from './Biometric/Biometric';
+import AttendanceLogs from './Biometric/AttendanceLogs';
 function App() {
   return (
     <>
@@ -40,6 +41,7 @@ function App() {
             <Route exact path="/web" element={<WebAuthnAuth />} />
             <Route exact path="/web2" element={<AttendanceForm />} />
             <Route exact path="/web3" element={<Biometric />} />
+            <Route exact path="/web4" element={<AttendanceLogs />} />
           </Routes>
         </BrowserRouter>
       </div>

@@ -7,7 +7,7 @@ import { signInWithPopup, OAuthProvider } from "firebase/auth";
 import PasswordInputBox2 from '../Components/PasswordInputBox2';
 import EmailInputBox2 from '../Components/EmailInputBox2';
 import UsernameInputBox2 from '../Components/UsernameInputBox2';
-import Button2 from '../Components/Button2';
+import Button2WithLogs from '../Components/Button2WithLogs';
 import ForgotPassword from '../Components/ForgotPassword';
 import Checkbox from '../Components/Checkbox';
 
@@ -101,7 +101,7 @@ const Form3 = () => {
                                             {errors.checkbox && <p className="text-red-500 text-sm">{errors.checkbox}</p>}
                                         </div>
                                         
-                                        <Button2
+                                        <Button2WithLogs
                                             className="text-sm text-right flex w-full justify-center rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-green-500"
                                             username={username}
                                             email={email}
