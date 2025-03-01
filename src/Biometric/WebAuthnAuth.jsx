@@ -9,7 +9,7 @@ const WebAuthnAuth = () => {
     try {
       setMessage("Requesting registration...");
 
-      // Fetch registration challenge from backend
+      //Fetch registration challenge from backend
       const resp = await fetch("/api/webauthn/generate-registration-options");
       const options = await resp.json();
 
@@ -38,7 +38,7 @@ const WebAuthnAuth = () => {
   const authenticateUser = async () => {
     try {
       setMessage("Requesting authentication...");
-
+      
       // Fetch authentication challenge from backend
       const resp = await fetch("/api/webauthn/generate-authentication-options");
       const options = await resp.json();

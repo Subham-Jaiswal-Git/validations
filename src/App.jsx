@@ -19,6 +19,7 @@ import WebAuthnAuth from './Biometric/WebAuthnAuth'
 import AttendanceForm from './Biometric/AttendanceForm';
 import Biometric from './Biometric/Biometric';
 import AttendanceLogs from './Biometric/AttendanceLogs';
+import BiometricIntegration from './Biometric2/BiometricIntegration';
 function App() {
   return (
     <>
@@ -42,6 +43,7 @@ function App() {
             <Route exact path="/web2" element={<AttendanceForm />} />
             <Route exact path="/web3" element={<Biometric />} />
             <Route exact path="/web4" element={<AttendanceLogs />} />
+            <Route exact path="/bio" element={<BiometricIntegration />} />
           </Routes>
         </BrowserRouter>
       </div>
