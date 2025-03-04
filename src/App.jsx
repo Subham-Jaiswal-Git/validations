@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Form from './Sections/Form';
 import Form2 from './Sections/Form2';
@@ -20,13 +20,19 @@ import AttendanceForm from './Biometric/AttendanceForm';
 import Biometric from './Biometric/Biometric';
 import AttendanceLogs from './Biometric/AttendanceLogs';
 import BiometricIntegration from './Biometric2/BiometricIntegration';
+import Component1 from './Animation/Component1';
+import Component2 from './Animation/Component2';
+import Component3 from './Animation/Component3';
+import Component4 from './Animation/Component4';
+import Component5 from './Animation/Component5';
+import Menu from './Animation2/Menu';
 function App() {
   return (
     <>
       <div className="App">
         <BrowserRouter>
           <Routes>
-          
+
             <Route exact path="/" element={<ParentComponent />} />
             <Route exact path="/form" element={<Form />} />
             <Route exact path="/hero" element={<Hero />} />
@@ -44,6 +50,13 @@ function App() {
             <Route exact path="/web3" element={<Biometric />} />
             <Route exact path="/web4" element={<AttendanceLogs />} />
             <Route exact path="/bio" element={<BiometricIntegration />} />
+
+            <Route exact path="/an" element={<Component1 />} />
+            <Route exact path="/an2" element={<Component2 />} />
+            <Route exact path="/an3" element={<Component3 />} />
+            <Route exact path="/an4" element={<Component4 />} />
+            <Route exact path="/an5" element={<Component5 />} />
+            <Route exact path="/ex1" element={<Menu />} />
           </Routes>
         </BrowserRouter>
       </div>
